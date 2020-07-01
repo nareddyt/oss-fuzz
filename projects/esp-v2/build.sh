@@ -94,8 +94,9 @@ then
     "*.hpp" "--include" "*.cpp" "--include" "*.c" "--include" "*/" "--exclude" "*")
   rsync -avLk "${RSYNC_FILTER_ARGS[@]}" "${SRC}"/esp-v2/bazel-out "${REMAP_PATH}"
   rsync -avLkR "${RSYNC_FILTER_ARGS[@]}" "${HOME}" "${OUT}"
-  # Some low-level libraries are built located /tmp.
+  # Some low-level libraries' sources are located in /tmp.
   # But ESPv2 engineeers don't really look at them.
+  # Excluding these from coverage should not affect fuzzing much.
   # rsync -avLkR "${RSYNC_FILTER_ARGS[@]}" /tmp "${OUT}"
 fi
 
